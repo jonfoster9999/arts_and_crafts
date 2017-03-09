@@ -1,6 +1,9 @@
 class SessionsController < ApplicationController
 
 	def new
+		if logged_in?
+			redirect_to current_user
+		end
 		@user = User.new
 	end
 
@@ -13,6 +16,7 @@ class SessionsController < ApplicationController
 			@user = User.find_by(:email => params[:user][:email])
 			if @user && @user.authenticate(params[:user][:password])
 				session[:user_id] = @user.id
+				binding.pry
 				redirect_to @user
 			else
 				flash[:notice] = "Invalid email or password"

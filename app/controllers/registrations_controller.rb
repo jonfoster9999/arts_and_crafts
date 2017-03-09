@@ -1,6 +1,10 @@
 class RegistrationsController < ApplicationController
 	def new
+		if logged_in?
+			redirect_to current_user
+		end
 		@user = User.new
+		
 	end
 
 	def create
