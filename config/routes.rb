@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :awards
+  resources :supplies
+  resources :projects
   get '/users/new', to: 'registrations#new', :as => :new_user_registration
   post '/users', to: 'registrations#create', :as => :create_new_user
   resources :users, only: [:show, :index]

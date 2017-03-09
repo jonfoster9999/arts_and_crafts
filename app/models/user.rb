@@ -1,5 +1,8 @@
 class User < ApplicationRecord
 	has_secure_password
+	has_many :projects
+	has_many :awards, through: :projects
+	
 	validates :email, presence: true
 
 	def self.from_omniauth(auth)
