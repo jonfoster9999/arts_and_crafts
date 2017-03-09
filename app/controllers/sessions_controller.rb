@@ -1,12 +1,18 @@
 class SessionsController < ApplicationController
 
+	def new
+
+	end
+
 	def create
-		user = User.find_or_create_by(:email => auth['email']) do |u|
-			u.name = auth['info']['name']
-			u.password = SecureRandom.hex
-		end
+		user = User.from_omniauth(auth)
 		session[:user_id] = user.id
 		redirect_to user
+	end
+
+	def destroy
+		session.clear
+		redirect_to root_path
 	end
 
 	private

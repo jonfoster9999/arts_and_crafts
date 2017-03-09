@@ -16,9 +16,9 @@ ActiveRecord::Schema.define(version: 20170308215325) do
     t.string   "name"
     t.string   "email"
     t.string   "password_digest"
-    t.integer  "uid"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.integer  "uid",             limit: 12
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
 end
