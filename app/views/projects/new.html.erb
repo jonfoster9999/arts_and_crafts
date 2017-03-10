@@ -1,0 +1,17 @@
+<%= form_for [@user, @project] do |f| %>
+<%= f.label :title %><br>
+<%= f.text_field :title %><br>
+<%= f.label :description %><br>
+<%= f.text_area :description %><br>
+<%= f.collection_check_boxes :supply_ids, Supply.all, :id, :title %><br>
+<%= f.fields_for :supplies do |supply_field| %>
+<!-- 	<%= supply_field.collection_select :id, Supply.all, :id, :title, :include_blank => true %> -->
+	<%= supply_field.label :title, "Supply" %>
+	<%= supply_field.text_field :title %>
+	<%= supply_field.label :price, "Price" %>
+	<%= supply_field.text_field :price %><br>
+<% end %>
+<%= f.submit "Create Project" %>
+
+
+<% end %>

@@ -1,7 +1,7 @@
 class User < ApplicationRecord
 	has_secure_password
 	has_many :projects
-	has_many :awards, through: :projects
+	has_many :reviews, through: :projects
 	
 	validates :email, presence: true
 
