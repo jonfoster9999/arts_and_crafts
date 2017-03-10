@@ -1,0 +1,19 @@
+<h3>Welcome, <%= @user.name %>!</h3>
+<div id="timeline">
+<h4>Project Timeline:</h4>
+<ul>
+<% @projects.each do |project| %>
+<li><%= project.title %> - <em><%= project.description %></em> (<%= project.user.name %>)</li>
+
+<% end %>
+</ul>
+</div>
+
+<div id="members">
+	<h4>Contributing Members</h4>
+	<ul>
+		<% @users.each do |user| %>
+			<li><%= link_to user.name, user_path(user) %></li>
+		<% end %>
+	</ul>
+</div>

@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
 
 	def new
 		if logged_in?
-			redirect_to current_user
+			redirect_to home_path
 		end
 		@user = User.new
 	end
@@ -11,12 +11,12 @@ class SessionsController < ApplicationController
 		if request.env['omniauth.auth']
 			@user = User.from_omniauth(auth)
 			session[:user_id] = @user.id
-			redirect_to @user
+			redirect_to home_path
 		else
 			@user = User.find_by(:email => params[:user][:email])
 			if @user && @user.authenticate(params[:user][:password])
 				session[:user_id] = @user.id
-				redirect_to @user
+				redirect_to home_path
 			else
 				flash[:notice] = "Invalid email or password"
 				redirect_to login_path
