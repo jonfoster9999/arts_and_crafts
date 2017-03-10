@@ -1,6 +1,6 @@
 <h3>Welcome, <%= @user.name %>!</h3>
-<div id="timeline">
-<h4>Project Timeline:</h4>
+<div class="timeline">
+<h4>New Projects From Members:</h4>
 <ul>
 <% @projects.each do |project| %>
 <li><%= project.title %> - <em><%= project.description %></em> (<%= project.user.name %>)</li>
@@ -9,8 +9,8 @@
 </ul>
 </div>
 
-<div id="members">
-	<h4>Contributing Members</h4>
+<div class="members">
+	<h4>Arts&Crafts Members:</h4>
 	<ul>
 		<% @users.each do |user| %>
 			<li><%= link_to user.name, user_path(user) %></li>

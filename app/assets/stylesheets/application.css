@@ -14,6 +14,9 @@
  *= require_self
  */
 /* Add a black background color to the top navigation */
+body {
+	min-width: 900px;
+}
 .topnav {
     background-color: #333;
     overflow: hidden;
@@ -40,4 +43,22 @@
 .topnav a.active {
     background-color: #4CAF50;
     color: white;
+}
+
+.timeline {
+	float:left;
+}
+
+.members {
+	background: lightgreen;
+	width: 240px;
+	border-bottom: solid 1px black;
+	padding-left: 10px;
+	float: right;
+	margin-top: -58px;
+	right: 8px;
+}
+
+.main_heading {
+	margin: auto;
 }
