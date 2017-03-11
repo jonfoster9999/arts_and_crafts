@@ -1,0 +1,13 @@
+<h1><%= @user.name %></h1>
+<!-- PARTIALS! -->
+<h3>Projects: </h3>
+<ul>
+	<% @user.projects.each do |project| %>
+	<li><%= link_to project.title, user_project_path(@user, project) %></li>
+		<%end %>
+</ul>
+
+<p><%= @user.name %>'s projects have recieved these reviews: </p>
+
+
+<p><%= @user.name %> has contributed these reviews: </p>
