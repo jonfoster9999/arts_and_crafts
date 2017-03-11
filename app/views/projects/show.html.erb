@@ -1,7 +1,9 @@
 <br>
 <h2><%= @project.title %> </h2>
 <h5>by <%= link_to @user.name, user_path(@user) %></h5>
-
+<% if current_user.id == @project.user_id %>
+<%= link_to "Edit", edit_user_project_path(@user, @project) %>
+<% end %>
 
 <p><%= @project.description %></p>
 

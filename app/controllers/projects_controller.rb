@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
 	def new
 		@user = User.find(params[:user_id])
 		@project = @user.projects.build
-		20.times do
+		10.times do
 			@project.supplies.build
 		end
 
@@ -10,6 +10,14 @@ class ProjectsController < ApplicationController
 
 	def index
 
+	end
+
+	def edit
+		@user = User.find(params[:user_id])
+		@project = Project.find(params[:id])
+		10.times do
+			@project.supplies.build
+		end
 	end
 
 	def show
@@ -29,6 +37,13 @@ class ProjectsController < ApplicationController
 			flash[:notice] = "Projects must have a title and a description"
 			redirect_to new_user_project_path
 		end
+	end
+
+	def update
+		@user = User.find(params[:user_id])
+		@project = Project.find(params[:id])
+		@project.update(project_params)
+		redirect_to user_project_path(@user, @project)
 	end
 
 

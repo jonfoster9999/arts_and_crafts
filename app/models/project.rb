@@ -14,9 +14,12 @@ class Project < ApplicationRecord
 				supply = Supply.find_or_create_by(:title => attribute_hash[:title]) do |s|
 					s.price = attribute_hash[:price]
 				end
-				self.project_supplies.build(:supply_id => supply.id)
+				if !self.supplies.include?(supply)
+					self.project_supplies.build(:supply_id => supply.id)
+				end
 			end
 		end
+		self.project_supplies = self.project_supplies.uniq
 	end
 
 	def short_description
