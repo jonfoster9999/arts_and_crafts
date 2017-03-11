@@ -17,6 +17,53 @@
 body {
 	min-width: 900px;
 }
+
+
+ 
+ul.mainlist {
+  list-style-type: none;
+  width: 500px;
+
+}
+ 
+ul.mainlist h3 {
+  font: bold 20px/1.5 Helvetica, Verdana, sans-serif;
+  margin-left: 0px;
+}
+ 
+li img {
+  float: left;
+  height: 29px;
+  margin: 18px 15px 0 0;
+}
+ 
+ul.mainlist li p {
+  font: 200 12px/1.5 Georgia, Times New Roman, serif;
+  margin-left: 45px;
+}
+ 
+ul.mainlist li {
+  border: 1px dashed lightgray;
+  padding: 4px;
+  overflow: auto;
+}
+ 
+ul.mainlist li:hover {
+  background: #eee;
+  cursor: pointer;
+}
+
+#flash_error, #flash_notice, #flash_alert {
+    color: red;
+}
+
+.green {
+    color: orange;
+    font-size: .5em;
+}
+input.error {
+    border: 1px solid red;
+}
 .topnav {
     background-color: #333;
     overflow: hidden;

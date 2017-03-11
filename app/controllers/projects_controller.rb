@@ -19,10 +19,16 @@ class ProjectsController < ApplicationController
 
 
 	def create
-
 		@user = User.find(params[:user_id])
-		@user.projects.create(project_params)
-		redirect_to home_path
+		@project = @user.projects.build(project_params)
+		if @project.valid?
+			@project.user = @user
+			@project.save
+			redirect_to home_path
+		else
+			flash[:notice] = "Projects must have a title and a description"
+			redirect_to new_user_project_path
+		end
 	end
 
 

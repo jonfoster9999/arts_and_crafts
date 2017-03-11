@@ -5,6 +5,7 @@ class User < ApplicationRecord
 	has_many :authored_reviews, :class_name => "Review", :foreign_key => 'author_id'
 	
 	validates :email, presence: true
+	validates :name, presence: true
 
 	def self.from_omniauth(auth)
 		  	where(uid: auth.uid).first_or_create do |user|

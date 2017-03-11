@@ -1,9 +1,18 @@
 <h3>Welcome, <%= @user.name %>!(<%= link_to "Create a new project", new_user_project_path(@user) %>)</h3>
 <div class="timeline">
 <h4>New Projects From Members:</h4>
-<ul>
+<ul class = "mainlist">
+<!-- TODO: RENDER PARTIAL -->
+
 <% @projects.each do |project| %>
-<li><%= link_to project.title, user_project_path(project.user, project) %> - <em><%= project.description %></em> (<%= project.user.name %>)</li>
+<li>
+<img src="<%= asset_path( 'scissors.png' ) %>" />
+<h3><%= link_to project.title, user_project_path(project.user, project) %>
+	<% if project.user_id == current_user.id %>
+	<span class="green">My Project!</span>
+<% end %>
+</h3><p><em><%= project.short_description %></em> (<%= project.user.name %>) 
+</p></li>
 
 <% end %>
 </ul>
