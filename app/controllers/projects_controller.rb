@@ -12,12 +12,17 @@ class ProjectsController < ApplicationController
 
 	end
 
+	def show
+		@user = User.find(params[:user_id])
+		@project = Project.find(params[:id])
+	end
+
 
 	def create
 
 		@user = User.find(params[:user_id])
 		@user.projects.create(project_params)
-
+		redirect_to home_path
 	end
 
 

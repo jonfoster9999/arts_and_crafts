@@ -1,0 +1,14 @@
+<br>
+<h3><%= @project.title %></h3>
+
+<p><%= @project.description %></p>
+
+<h4>Supplies</h4>
+<ul>
+<% @project.supplies.each do |supply| %>
+<li><%= link_to supply.title, supply_path(supply) %> - $<%= supply.price %></li>
+
+<% end %>
+
+
+</ul>

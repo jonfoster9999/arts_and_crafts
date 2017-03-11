@@ -1,9 +1,9 @@
-<h3>Welcome, <%= @user.name %>!</h3>
+<h3>Welcome, <%= @user.name %>!(<%= link_to "Create a new project", new_user_project_path(@user) %>)</h3>
 <div class="timeline">
 <h4>New Projects From Members:</h4>
 <ul>
 <% @projects.each do |project| %>
-<li><%= project.title %> - <em><%= project.description %></em> (<%= project.user.name %>)</li>
+<li><%= link_to project.title, user_project_path(project.user, project) %> - <em><%= project.description %></em> (<%= project.user.name %>)</li>
 
 <% end %>
 </ul>
