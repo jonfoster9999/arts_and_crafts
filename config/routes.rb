@@ -16,10 +16,13 @@ Rails.application.routes.draw do
   root "static#welcome"
   get '/home' => 'static#home', :as => :home
   get '/about' => 'static#about', :as => :about
+  get '/top_rated' => 'static#top_rated', :as => :top_rated
+  get '/low_cost' => 'static#low_cost', :as => :low_cost
   get '/auth/facebook/callback' => 'sessions#create'
   get '/login' => 'sessions#new', :as => :login
   post '/login' => 'sessions#create'
   get '/logout' => 'sessions#destroy'
   post '/logout' => 'sessions#destroy'
+
 
 end

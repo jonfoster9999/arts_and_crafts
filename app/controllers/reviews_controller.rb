@@ -4,6 +4,13 @@ class ReviewsController < ApplicationController
 		redirect_to user_project_path(@review.project.user, @review.project)
 	end
 
+	def destroy
+		@review = Review.find(params[:id])
+		project = @review.project
+		@review.destroy
+		redirect_to user_project_path(project.user, project)
+	end
+
 
 	private
 

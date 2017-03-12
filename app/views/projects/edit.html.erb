@@ -9,7 +9,7 @@
 	<%= supply_field.label :title, "Supply" %>
 	<%= supply_field.text_field :title, :value => "" %>
 	<%= supply_field.label :price, "Price" %>
-	<%= supply_field.text_field :price, :value => "" %><br>
+	$<%= supply_field.text_field :price, :class => "short_field" %>.00<br>
 <% end %>
 <%= f.submit "Update Project" %>
 

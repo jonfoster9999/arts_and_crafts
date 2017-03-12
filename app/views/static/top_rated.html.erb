@@ -1,0 +1,11 @@
+
+
+
+<br>
+<h2>The top <%= @top_projects.count %> rated projects are: </h2>
+
+<ol>
+<% @top_projects.each do |project| %>
+<li><%= link_to project.title, user_project_path(project.user, project) %> with an average rating of <%= project.average_rating %></li>
+<% end %>
+</ol>

@@ -8,6 +8,7 @@ class Project < ApplicationRecord
 	validates :title, presence: true
 	validates :description, presence: true
 
+
 	def supplies_attributes=(attributes)
 		attributes.each do |index, attribute_hash|
 			if !attribute_hash[:title].blank? && !attribute_hash[:price].blank?
@@ -18,14 +19,36 @@ class Project < ApplicationRecord
 					self.project_supplies.build(:supply_id => supply.id)
 				end
 			end
-		end
-		self.project_supplies = self.project_supplies.uniq
+		end	
 	end
 
 	def short_description
-		self.description.length > 60?
-		self.description[0..60] + "..."
-		:
-		self.description
+		self.description.length > 60? self.description[0..60] + "..." : self.description
+	end
+
+	def average_rating
+		total = 0.00
+		self.reviews.each do |review|
+			total += review.rating.to_i
+		end
+		(total/self.reviews.count).round(1).nan? ? 0.0 : (total/self.reviews.count).round(1)
+	end
+
+	def self.top_rated_projects
+		self.all.sort { |a, b| b.average_rating <=> a.average_rating }[0..4]
+	end
+
+	def total_price
+		total = 0
+		self.supplies.each do |supply|
+			total += supply.price
+		end
+		total
+	end
+
+	def self.low_cost_projects
+		self.all.select do |project|
+			project if project.total_price < 30
+		end
 	end
 end

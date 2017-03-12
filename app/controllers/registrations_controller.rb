@@ -13,7 +13,6 @@ class RegistrationsController < ApplicationController
 			session[:user_id] = @user.id
 			redirect_to home_path
 		else
-		    flash[:alert] = "Invalid info."
 			render :new
 		end
 	end

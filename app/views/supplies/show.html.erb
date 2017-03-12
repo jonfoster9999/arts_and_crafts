@@ -1,4 +1,6 @@
 <h1><%= @supply.title %></h1>
+<%= link_to "Edit", edit_supply_path(@supply) %>
+<%= link_to "Delete", @supply, :method => :delete %>
 <h3>$<%= @supply.price %></h3>
 <p>This supply has been included in these projects: </p>
 <ul>

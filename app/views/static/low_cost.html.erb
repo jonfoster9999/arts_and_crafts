@@ -1,0 +1,6 @@
+<br>
+<h2>These projects were made for under $30: </h2>
+<ul>
+<% @low_cost_projects.each do |project| %>
+	<li class = "supply_list"><%= link_to project.title, user_project_path(project.user, project) %> at $<%= project.total_price %></li>
+	<% end %>

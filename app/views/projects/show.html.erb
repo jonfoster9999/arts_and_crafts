@@ -1,31 +1,44 @@
 <br>
-<h2><%= @project.title %> </h2>
-<h5>by <%= link_to @user.name, user_path(@user) %></h5>
+<h2><%= @project.title %> (<%= @project.average_rating %>/5.0 average rating) </h2>
 <% if current_user.id == @project.user_id %>
 <%= link_to "Edit", edit_user_project_path(@user, @project) %>
-<% end %>
+<%= link_to "Delete", user_project_path(@user, @project), :method => :delete %>
 
+<% end %>
+<h5>by <%= link_to @user.name, user_path(@user) %></h5>
+
+<div class = "description">
+Description:
 <p><%= @project.description %></p>
+</div>
 
+<div class="supplies">
 <h4>Supplies</h4>
+<% if !@project.supplies.empty? %>
 <ul>
-<% @project.supplies.each do |supply| %>
-<li><%= link_to supply.title, supply_path(supply) %> - $<%= supply.price %></li>
+<% @project.supplies.uniq.each do |supply| %>
+<li class="supply_list"><%= link_to supply.title, supply_path(supply) %> - $<%= supply.price %></li>
 
 <% end %>
-
+--------------------
+<li class="supply_list">Total Price: $<%= @project.total_price %></li>
 
 </ul>
+<% else %>
+<p>No supplies listed.</p>
+<% end %>
+</div>
+<br>
 
-<h3>Reviews: </h3>
-
+<div class="comment_form">
+Write a review:
 <%= form_for @review do |f| %>
 <%= f.hidden_field :author_id, :value => current_user.id %>
 <%= f.hidden_field :project_id, :value => @project.id %>
-<%= f.label :content %>
+
 <%= f.text_area :content %><br>
 <%= f.label :rating %>
-<%= f.radio_button :rating, '1' %>1
+<%= f.radio_button :rating, '1', :checked => true %>1
 <%= f.radio_button :rating, '2' %>2
 <%= f.radio_button :rating, '3' %>3
 <%= f.radio_button :rating, '4' %>4
@@ -33,12 +46,20 @@
 <%= f.submit "Submit Review" %>
 
 <% end %>
+
+</div>
+<h2>Reviews: </h2>
 <% if @project.reviews.empty? %>
-	Nothing to show.
+	No Comments Yet.
 	<% else %>
-<ul>
+<ul class="project_comments">
 <% @project.reviews.each do |review| %>
-	<li>"<%= review.content %>"" - Rating: <%= review.rating %> By <%= link_to review.author.name, user_path(review.author) %></li>
+	<li>"<%= review.content %>" - Rating: <%= review.rating %> <br>By <%= link_to review.author.name, user_path(review.author) %>
+	<% if review.author_id == current_user.id %>
+	<br>
+		<%= link_to "Delete", review, :method => :delete %>
+	<% end %>
+	</li>
 
 <% end %>
 
