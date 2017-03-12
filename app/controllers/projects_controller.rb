@@ -23,6 +23,7 @@ class ProjectsController < ApplicationController
 	def show
 		@user = User.find(params[:user_id])
 		@project = Project.find(params[:id])
+		@review = Review.new
 	end
 
 
