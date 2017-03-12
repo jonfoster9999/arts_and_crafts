@@ -8,6 +8,22 @@
 </ul>
 
 <p><%= @user.name %>'s projects have recieved these reviews: </p>
+<ul>
+	<% @user.reviews.each do |review| %>
+		<li>"<%= review.content %>" by <%= link_to review.author.name, user_path(review.author) %> on <%= link_to review.project.title, user_project_path(@user, review.project) %></li>
 
+
+	<% end %>
+
+</ul>
 
 <p><%= @user.name %> has contributed these reviews: </p>
+
+<ul>
+	<% @user.authored_reviews.each do |review| %>
+		<li>"<%= review.content %>" on <%= link_to review.project.title, user_project_path(@user, review.project) %></li>
+
+
+	<% end %>
+
+</ul>

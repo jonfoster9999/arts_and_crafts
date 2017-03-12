@@ -16,3 +16,17 @@
 
 
 </ul>
+
+<h3>Reviews: </h3>
+<% if @project.reviews.empty? %>
+	Nothing to show.
+	<% else %>
+<ul>
+<% @project.reviews.each do |review| %>
+	<li>"<%= review.content %>"" - Rating: <%= review.rating %> By <%= link_to review.author.name, user_path(review.author) %></li>
+
+<% end %>
+
+</ul>
+
+<% end %>
