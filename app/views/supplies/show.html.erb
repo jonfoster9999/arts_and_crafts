@@ -4,6 +4,5 @@
 <h3>$<%= @supply.price %></h3>
 <p>This supply has been included in these projects: </p>
 <ul>
-<% @supply.projects.each do |project| %>
-<li><%= link_to project.title, user_project_path(project.user, project) %></li>
-<% end %>
+	<%= render :partial => 'project', :collection => @supply.projects %>
+</ul>

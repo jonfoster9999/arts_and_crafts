@@ -1,21 +1,19 @@
 <br>
 <br>
 <div class="form">
-<h1>Welcome, please sign up!</h1>
-
-<%= form_for @user, :url => create_new_user_path, :class => 'register-form', :method => :post do |f| %>
-<%= f.label :name %><br>
-<%= f.text_field :name %><br>
-<%= f.label :email %><br>
-<%= f.text_field :email %><br>
-<%= f.label :password %><br>
-<%= f.password_field :password %><br>
-<%= f.submit :class => 'my_button' "Sign up!" %>
-<% end %>
-
-<% if @user.errors.any? %>
-	<% @user.errors.full_messages.each do |message| %>
-	<span class="red"><%= message %></span><br>
+	<h1>Welcome, please sign up!</h1>
+	<%= form_for @user, :url => create_new_user_path, :class => 'register-form', :method => :post do |f| %>
+		<%= f.label :name %><br>
+		<%= f.text_field :name %><br>
+		<%= f.label :email %><br>
+		<%= f.text_field :email %><br>
+		<%= f.label :password %><br>
+		<%= f.password_field :password %><br>
+		<%= f.submit :class => 'my_button' "Sign up!" %>
+	<% end %>
+	<% if @user.errors.any? %>
+		<% @user.errors.full_messages.each do |message| %>
+			<span class="red"><%= message %></span><br>
 		<% end %>
-<% end %>
+	<% end %>
 </div>

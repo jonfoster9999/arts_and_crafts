@@ -3,25 +3,24 @@
   <head>
     <title>ArtsAndCrafts</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag :all %>
   </head>
 
   <body>
-  <h1 class="main_heading">ARTS&CRAFTS</h1>
-   <div class="topnav" id="myTopnav">
-  <%= link_to "Home", home_path %>
-  <a href="/top_rated">Top Rated Projects</a>
-  <a href="/low_cost">Low-Cost Projects</a>
-  <%= link_to "About", about_path %>
-  <% if logged_in? %>
-  <%= link_to "Sign out", '/logout' %>
-  <span class="signed_in">Signed in as <span class="makegreen"><%= current_user.email %></span></span>
-  <% end %>
-</div>
-  <%= render "layouts/messages" %>
+    <h1 class="main_heading">ARTS&CRAFTS</h1>
+    <div class="topnav" id="myTopnav">
+      <%= link_to "Home", home_path %>
+      <a href="/top_rated">Top Rated Projects</a>
+      <a href="/low_cost">Low-Cost Projects</a>
+      <%= link_to "About", about_path %>
+      <% if logged_in? %>
+        <%= link_to "Sign out", '/logout' %>
+        <span class="signed_in">Signed in as <span class="makegreen"><%= current_user.email %></span></span>
+      <% end %>
+    </div>
+    <%= render "layouts/messages" %>
     <%= yield %>
   </body>
 </html>

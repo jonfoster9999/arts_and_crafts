@@ -3,9 +3,10 @@
 <div class="form">
 	<h1>Please Login!</h1>
 	<%= form_for @user, :url => '/login', :method => :post do |f| %>
-	<%= f.label :email %>
-	<%= f.text_field :email %><br>
-	<%= f.label :password %>
-	<%= f.password_field :password %><br>
-	<%= f.submit "Log in!" %>
-<% end %>
+		<%= f.label :email %>
+		<%= f.text_field :email %><br>
+		<%= f.label :password %>
+		<%= f.password_field :password %><br>
+		<%= f.submit "Log in!" %>
+	<% end %>
+</div>

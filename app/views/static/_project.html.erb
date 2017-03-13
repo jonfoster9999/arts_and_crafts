@@ -1,0 +1,8 @@
+<li class="project_list_item">
+	<img src="<%= asset_path( 'scissors.png' ) %>" />
+	<h3><%= link_to project.title, user_project_path(project.user, project) %>
+	<% if project.user_id == current_user.id %>
+		<span class="green">My Project!</span>
+	<% end %>
+	</h3><p><em><%= project.short_description %></em> (<%= project.user.name %>)</p>
+</li>

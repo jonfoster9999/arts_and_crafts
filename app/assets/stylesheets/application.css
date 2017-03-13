@@ -26,6 +26,12 @@ hr {
   list-style: none;
 }
 
+.user_reviews {
+  background-color: lightblue;
+  padding: 8px 0 8px 8px;
+  width: 50%;
+}
+
 .description {
   background-color: white;
   padding: 8px 0 8px 8px;
@@ -104,6 +110,10 @@ ul.mainlist li:hover {
 
 .makegreen {
   color: powderblue;
+}
+
+.really_green {
+  color: green;
 }
 
 .green {

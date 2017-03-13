@@ -1,39 +1,29 @@
 <h1><%= @user.name %></h1>
-<!-- PARTIALS! -->
 <h3>Projects: </h3>
 <ul>
 	<% @user.projects.each do |project| %>
-	<li><%= link_to project.title, user_project_path(@user, project) %></li>
-		<%end %>
+		<li><%= link_to project.title, user_project_path(@user, project) %></li>
+	<%end %>
 </ul>
-<div class="description">
-<p><%= @user.name %>'s projects have recieved these reviews: </p>
-<% if !@user.reviews.empty? %>
-<ul>
-	<% @user.reviews.each do |review| %>
-		<li>"<%= review.content %>" by <%= link_to review.author.name, user_path(review.author) %> on <%= link_to review.project.title, user_project_path(@user, review.project) %></li>
 
-
+<div class="user_reviews">
+	<p><%= @user.name %>'s projects have <span class="really_green">recieved</span> these reviews: </p>
+	<% if !@user.reviews.empty? %>
+		<ul>
+			<%= render :partial => "reviews_recieved", :collection => @reviews %>
+		</ul>
+	<% else %>
+		<p>Nothing to show.</p>
 	<% end %>
-
-</ul>
-<% else %>
-<p>Nothing to show.</p>
-<% end %>
 </div>
 <br>
-<div class="description">
-<p><%= @user.name %> has contributed these reviews: </p>
-<% if !@user.authored_reviews.empty? %>
-<ul>
-	<% @user.authored_reviews.each do |review| %>
-		<li>"<%= review.content %>" on <%= link_to review.project.title, user_project_path(review.user, review.project) %></li>
-
-
-	<% end %>
-
-</ul>
-<% else %>
-	<p>Nothing to show.</p>
+<div class="user_reviews">
+	<p><%= @user.name %> has <span class="really_green">contributed</span> these reviews: </p>
+	<% if !@authored_reviews.empty? %>
+		<ul>
+			<%= render :partial => "authored_reviews", :collection => @authored_reviews %>
+		</ul>
+	<% else %>
+		<p>Nothing to show.</p>
 	<% end %>
 </div>

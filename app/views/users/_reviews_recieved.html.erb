@@ -1,0 +1,1 @@
+				<li>"<%= reviews_recieved.content %>" by <%= link_to reviews_recieved.author.name, user_path(reviews_recieved.author) %> on <%= link_to reviews_recieved.project.title, user_project_path(reviews_recieved.user, reviews_recieved.project) %></li>

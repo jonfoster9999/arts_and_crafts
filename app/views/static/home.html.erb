@@ -1,28 +1,14 @@
 <h3>Welcome, <%= @user.name %>!(<%= link_to "Create a new project", new_user_project_path(@user) %>)</h3>
 <div class="timeline">
-<h4>New Projects From Members:</h4>
-<ul class = "mainlist">
-<!-- TODO: RENDER PARTIAL -->
-
-<% @projects.each do |project| %>
-<li class="project_list_item">
-<img src="<%= asset_path( 'scissors.png' ) %>" />
-<h3><%= link_to project.title, user_project_path(project.user, project) %>
-	<% if project.user_id == current_user.id %>
-	<span class="green">My Project!</span>
-<% end %>
-</h3><p><em><%= project.short_description %></em> (<%= project.user.name %>) 
-</p></li>
-
-<% end %>
-</ul>
+	<h4>New Projects From Members:</h4>
+	<ul class = "mainlist">
+		<%= render :partial => "project", :collection => @projects %>
+	</ul>
 </div>
 
 <div class="members">
 	<h4>Arts&Crafts Members:</h4>
 	<ul>
-		<% @users.each do |user| %>
-			<li><%= link_to user.name, user_path(user) %></li>
-		<% end %>
+		<%= render :partial => 'user', :collection => @users %>
 	</ul>
 </div>

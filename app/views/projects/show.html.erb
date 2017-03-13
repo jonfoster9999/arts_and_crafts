@@ -1,68 +1,38 @@
 <br>
 <h2><%= @project.title %> (<%= @project.average_rating %>/5.0 average rating) </h2>
 <% if current_user.id == @project.user_id %>
-<%= link_to "Edit", edit_user_project_path(@user, @project) %>
-<%= link_to "Delete", user_project_path(@user, @project), :method => :delete %>
-
+	<%= link_to "Edit", edit_user_project_path(@user, @project) %>
+	<%= link_to "Delete", user_project_path(@user, @project), :method => :delete %>
 <% end %>
 <h5>by <%= link_to @user.name, user_path(@user) %></h5>
 
 <div class = "description">
-Description:
-<p><%= @project.description %></p>
+	Description:<p><%= @project.description %></p>
 </div>
 
 <div class="supplies">
-Supplies:
-<% if !@project.supplies.empty? %>
-<ul>
-<% @project.supplies.uniq.each do |supply| %>
-<li class="supply_list"><%= link_to supply.title, supply_path(supply) %> - $<%= supply.price %></li>
+	Supplies:
+	<% if !@project.supplies.empty? %>
+		<ul>
+			<%= render :partial => "supply", :collection => @project.supplies.uniq %>
+			--------------------
+			<li class="supply_list">Total Cost: $<%= @project.total_price %></li>
 
-<% end %>
---------------------
-<li class="supply_list">Total Cost: $<%= @project.total_price %></li>
-
-</ul>
-<% else %>
-<p>No supplies listed.</p>
-<% end %>
+		</ul>
+	<% else %>
+		<p>No supplies listed.</p>
+	<% end %>
 </div>
 <br>
-
 <div class="comment_form">
-Write a review:
-<%= form_for @review do |f| %>
-<%= f.hidden_field :author_id, :value => current_user.id %>
-<%= f.hidden_field :project_id, :value => @project.id %>
-
-<%= f.text_area :content %><br>
-<%= f.label :rating %>
-<%= f.radio_button :rating, '1', :checked => true %>1
-<%= f.radio_button :rating, '2' %>2
-<%= f.radio_button :rating, '3' %>3
-<%= f.radio_button :rating, '4' %>4
-<%= f.radio_button :rating, '5' %>5<br>
-<%= f.submit "Submit Review" %>
-
-<% end %>
-
+	Write a review:
+	<%= render :partial => "comment_form", locals: {project: @project, review: @review} %>
 </div>
 <h2>Reviews: </h2>
 <% if @project.reviews.empty? %>
 	No Comments Yet.
-	<% else %>
-<ul class="project_comments">
-<% @project.reviews.each do |review| %>
-	<li>"<%= review.content %>" - Rating: <%= review.rating %> <br>By <%= link_to review.author.name, user_path(review.author) %>
-	<% if review.author_id == current_user.id %>
-	<br>
-		<%= link_to "Delete", review, :method => :delete %>
-	<% end %>
-	</li>
-
-<% end %>
-
-</ul>
-
+<% else %>
+	<ul class="project_comments">
+		<%= render :partial => "review", :collection => @project.reviews %>
+	</ul>
 <% end %>
