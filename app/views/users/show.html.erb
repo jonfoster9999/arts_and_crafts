@@ -27,7 +27,7 @@
 <% if !@user.authored_reviews.empty? %>
 <ul>
 	<% @user.authored_reviews.each do |review| %>
-		<li>"<%= review.content %>" on <%= link_to review.project.title, user_project_path(@user, review.project) %></li>
+		<li>"<%= review.content %>" on <%= link_to review.project.title, user_project_path(review.user, review.project) %></li>
 
 
 	<% end %>

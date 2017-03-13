@@ -37,6 +37,9 @@ class ProjectsController < ApplicationController
 		@user = User.find(params[:user_id])
 		@project = Project.find(params[:id])
 		@review = Review.new
+		if @project.user != @user
+			render :error
+		end
 	end
 
 

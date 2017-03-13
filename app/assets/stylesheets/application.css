@@ -27,7 +27,7 @@ hr {
 }
 
 .description {
-  background-color: #D4DEE7;
+  background-color: white;
   padding: 8px 0 8px 8px;
   width: 50%;
 }
@@ -44,7 +44,7 @@ textarea {
 
 .supplies {
   padding: 8px 0 8px 8px;
-  background-color: #728CA6;
+  background-color: white;
   width: 50%;
 }
 
@@ -83,12 +83,14 @@ li img {
 ul.mainlist li p {
   font: 200 12px/1.5 Georgia, Times New Roman, serif;
   margin-left: 45px;
+
 }
  
 ul.mainlist li {
-  border: 1px dashed lightgray;
+
   padding: 4px;
   overflow: auto;
+  margin-bottom: 24px;
 }
  
 ul.mainlist li:hover {
@@ -98,6 +100,10 @@ ul.mainlist li:hover {
 
 #flash_error, #flash_notice, #flash_alert {
     color: red;
+}
+
+.makegreen {
+  color: powderblue;
 }
 
 .green {
@@ -121,6 +127,14 @@ input.error {
     padding: 14px 16px;
     text-decoration: none;
     font-size: 17px;
+}
+
+.signed_in {
+  color: white;
+  float: right;
+  margin-top: 20px;
+  margin-right: 18px;
+  font-size: .8em;
 }
 
 /* Change the color of links on hover */
@@ -152,4 +166,65 @@ input.error {
 
 .main_heading {
 	margin: auto;
+}
+
+.login-page {
+  width: 360px;
+  padding: 8% 0 0;
+  margin: auto;
+}
+.form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.form input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.project_list_item {
+  box-shadow: 1px 1px 1px 0px black;
+  background-color : #DDD;
+}
+.form button:hover,.form button:active,.form button:focus {
+  background: #43A047;
+}
+.form .message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+.form .message a {
+  color: #4CAF50;
+  text-decoration: none;
+}
+.form .register-form {
+  display: none;
+}
+.form input[type ="submit"] {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: lightblue;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: black;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
 }

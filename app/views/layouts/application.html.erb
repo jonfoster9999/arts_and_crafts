@@ -16,7 +16,10 @@
   <a href="/top_rated">Top Rated Projects</a>
   <a href="/low_cost">Low-Cost Projects</a>
   <%= link_to "About", about_path %>
-  <%= link_to "Sign out", '/logout' if logged_in? %>
+  <% if logged_in? %>
+  <%= link_to "Sign out", '/logout' %>
+  <span class="signed_in">Signed in as <span class="makegreen"><%= current_user.email %></span></span>
+  <% end %>
 </div>
   <%= render "layouts/messages" %>
     <%= yield %>

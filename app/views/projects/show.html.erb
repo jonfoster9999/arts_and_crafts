@@ -13,7 +13,7 @@ Description:
 </div>
 
 <div class="supplies">
-<h4>Supplies</h4>
+Supplies:
 <% if !@project.supplies.empty? %>
 <ul>
 <% @project.supplies.uniq.each do |supply| %>
@@ -21,7 +21,7 @@ Description:
 
 <% end %>
 --------------------
-<li class="supply_list">Total Price: $<%= @project.total_price %></li>
+<li class="supply_list">Total Cost: $<%= @project.total_price %></li>
 
 </ul>
 <% else %>
