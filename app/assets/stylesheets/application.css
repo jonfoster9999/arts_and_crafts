@@ -18,6 +18,8 @@ body {
 	min-width: 900px;
 }
 
+
+
 hr {
   text-align: left;
 }
@@ -237,4 +239,10 @@ input.error {
   -webkit-transition: all 0.3 ease;
   transition: all 0.3 ease;
   cursor: pointer;
+}
+
+ul.list_of_supplies, ul.project_comments {
+  list-style: none;
+  padding-left: 0px;
+  margin-top: 0px;
 }

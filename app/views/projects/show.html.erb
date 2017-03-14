@@ -11,11 +11,12 @@
 </div>
 
 <div class="supplies">
-	Supplies:
+	Supplies:<br>
+	----------------------
 	<% if !@project.supplies.empty? %>
-		<ul>
+		<ul class="list_of_supplies">
 			<%= render :partial => "supply", :collection => @project.supplies.uniq %>
-			--------------------
+			----------------------
 			<li class="supply_list">Total Cost: $<%= @project.total_price %></li>
 
 		</ul>
@@ -28,7 +29,7 @@
 	Write a review:
 	<%= render :partial => "comment_form", locals: {project: @project, review: @review} %>
 </div>
-<h2>Reviews: </h2>
+<h3>Reviews: </h3>
 <% if @project.reviews.empty? %>
 	No Comments Yet.
 <% else %>

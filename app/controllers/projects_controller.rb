@@ -61,6 +61,8 @@ class ProjectsController < ApplicationController
 		@project = Project.find(params[:id])
 		@project.update(project_params)
 		redirect_to user_project_path(@user, @project)
+
+		#conditional here ??
 	end
 
 	def destroy
