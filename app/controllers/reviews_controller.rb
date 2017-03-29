@@ -11,7 +11,6 @@ class ReviewsController < ApplicationController
 		redirect_to user_project_path(project.user, project)
 	end
 
-
 	private
 
 	def review_params

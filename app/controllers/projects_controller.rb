@@ -1,23 +1,12 @@
 class ProjectsController < ApplicationController
 	before_action :check_logged_in
 
-	def check_logged_in
-		if !logged_in?
-			redirect_to '/'
-		end
-	end
-
 	def new
 		@user = User.find(params[:user_id])
 		@project = @user.projects.build
 		10.times do
 			@project.supplies.build
 		end
-
-	end
-
-	def index
-
 	end
 
 	def edit
@@ -61,8 +50,6 @@ class ProjectsController < ApplicationController
 		@project = Project.find(params[:id])
 		@project.update(project_params)
 		redirect_to user_project_path(@user, @project)
-
-		#conditional here ??
 	end
 
 	def destroy

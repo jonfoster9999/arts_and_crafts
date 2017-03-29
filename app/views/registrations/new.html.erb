@@ -9,7 +9,7 @@
 		<%= f.text_field :email %><br>
 		<%= f.label :password %><br>
 		<%= f.password_field :password %><br>
-		<%= f.submit :class => 'my_button' "Sign up!" %>
+		<%= f.submit "Sign up!", :class => 'my_button'  %>
 	<% end %>
 	<% if @user.errors.any? %>
 		<% @user.errors.full_messages.each do |message| %>

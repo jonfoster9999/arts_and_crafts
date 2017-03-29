@@ -3,8 +3,7 @@ class RegistrationsController < ApplicationController
 		if logged_in?
 			redirect_to home_path
 		end
-		@user = User.new
-		
+		@user = User.new		
 	end
 
 	def create
@@ -16,7 +15,6 @@ class RegistrationsController < ApplicationController
 			render :new
 		end
 	end
-
 
 	private
 
