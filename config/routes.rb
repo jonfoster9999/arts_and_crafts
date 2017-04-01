@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get '/low_cost' => 'static#low_cost', :as => :low_cost
   get '/auth/facebook/callback' => 'sessions#create'
   get '/login' => 'sessions#new', :as => :login
+  get '/projects' => 'projects#projects'
   post '/login' => 'sessions#create'
   get '/logout' => 'sessions#destroy'
   post '/logout' => 'sessions#destroy'

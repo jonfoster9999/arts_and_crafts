@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
+//= require home
 
 $(window).on('load', function(e){
   if (window.location.hash == '#_=_') {
@@ -23,6 +23,11 @@ $(window).on('load', function(e){
   }
 })
 
-$('body').click(function(){
-	alert("hello")
+$(function(){
+
+function testMe(){
+	alert("YO!")
+}
+
 })
+

@@ -64,6 +64,14 @@ class ProjectsController < ApplicationController
 		end
 	end
 
+	def projects
+		@obj = {}
+		@projects = Project.all
+		@obj[:projects] = @projects
+		@obj[:current_id] = current_user.id
+		render json: @obj
+	end
+
 	private
 
 	def project_params

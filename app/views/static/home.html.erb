@@ -6,9 +6,8 @@
 
 <div class="timeline">
 	<h4>New Projects From Members:</h4>
-	<ul class = "mainlist">
-		<%= render :partial => "project", :collection => @projects %>
-	</ul>
+	<ul class = "mainlist"><!-- 
+<%= render :partial => "project", :collection => @projects %>  -->
 </div>
 
 <div class="members">
@@ -17,3 +16,45 @@
 		<%= render :partial => 'user', :collection => @users %>
 	</ul>
 </div>
+
+	<script>
+		$(function(){
+
+			function Project(info) {
+				this.user_id = info.user_id
+				this.id = info.id
+				this.title = info.title
+				this.description = info.description
+			} 
+
+			Project.prototype = {
+				truncate: function(){
+					return this.description.length > 60 ? this.description.slice(0, 60) + "..." : this.description
+				},
+				buildLink: function(){
+					return "/users/" + this.user_id + "/projects/" + this.id
+				}
+			}
+
+			$.get('/projects', function(response){
+				var currentId = response["current_id"]
+				var projects = response["projects"]
+				var list = ""
+				$.each(projects, function(index, projectInfo){
+					project = new Project(projectInfo)
+					var listItem = '<li class="project_list_item">'
+					listItem += '<img src="<%= asset_path( 'scissors.png' ) %>" />'
+					listItem += '<h3><a href="' + project.buildLink() +'">'
+					listItem += project.title + '</a>'
+					if (currentId == project.user_id) {
+						listItem += '                  <span class="green">My Project!</span>'
+					}
+					listItem += "</h3>"
+					listItem += "<p><em>" + project.truncate() + "</p></em>"
+					listItem += '</li>'
+					list += listItem
+				})
+				$('.mainlist').append(list)
+			})
+		})
+	</script>
