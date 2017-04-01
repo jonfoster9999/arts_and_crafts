@@ -22,3 +22,7 @@ $(window).on('load', function(e){
     e.preventDefault(); // no page reload
   }
 })
+
+$('body').click(function(){
+	alert("hello")
+})

@@ -1,4 +1,9 @@
 <h3>Welcome, <%= @user.name %>!(<%= link_to "Create a new project", new_user_project_path(@user) %>)</h3>
+<% if @user.notifications %>
+<p>You recieved a review</p>
+<% end %>
+<% reset_notifications(@user) %>
+
 <div class="timeline">
 	<h4>New Projects From Members:</h4>
 	<ul class = "mainlist">
