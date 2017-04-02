@@ -1,5 +1,5 @@
 <br>
-<h2><%= @project.title %> (<%= @project.average_rating %>/5.0 average rating) </h2>
+<h2><%= @project.title %> (<span id="rating"><%= @project.average_rating %></span>/5.0 average rating) </h2>
 <% if current_user.id == @project.user_id %>
 	<%= link_to "Edit", edit_user_project_path(@user, @project) %>
 	<%= link_to "Delete", user_project_path(@user, @project), :method => :delete %>
@@ -31,21 +31,74 @@
 </div>
 <h3>Reviews: </h3>
 <ul class="project_comments">
-<% if @project.reviews.empty? %>
-<% else %>
-
 		<%= render :partial => "review", :collection => @project.reviews %>
-
-<% end %>
 <script>
 
 $(function(){
+	/////////////
+	//variables// 
+	/////////////
+
+	var projectUrl = window.location.href + ".json";
 	var form = $('form')
+
+	//generic get function
+ 	function getProjectInfo (callback) {
+ 		$.get(projectUrl)
+ 			.success(callback)
+ 		}
+
+ 	/////////////
+ 	//callbacks//
+ 	/////////////
+
+ 	function buildHtmlCallback(response) {
+
+ 		///////////////////////
+ 		//TODO: BUILD MY VIEW//
+ 		///////////////////////
+
+ 		console.log(response, "HEARD CLICK")
+ 	}
+	
+	function reviewCallback(response) {
+			//gets the new version of the project after the review is added, aka reviews length 
+			// increases by one and project.averageReview() returns updated info.	
+		var myProject = new ProjectForShowPage(response)
+		//UPDATE CURRENT AVERAGE RATING TO NEW AVERAGE RATING
+		$('#rating').text(myProject.averageRating())
+	}
+
+	//constructor
+	function ProjectForShowPage(productHash) {
+		for (key in productHash) {
+			this[key] = productHash[key]
+			//make this available site wide?
+		}
+	}
+
+	//constructor prototype
+	ProjectForShowPage.prototype.averageRating = function(){
+		var ratingTotal = 0;
+		var numberOfReviews = this.reviews.length;
+		for(var i = 0, n = this.reviews.length; i < n; i++) {
+			ratingTotal += this.reviews[i].rating;
+		}
+		return (ratingTotal/numberOfReviews).toFixed(1)
+	}
+
+	//review submission
+
 	form.submit(function(e){
 		e.preventDefault();
 		form.removeClass('hidden');
  		$.post(this.action, form.serialize())
  			.success(function(data){
+ 				
+ 				//handles updating the average review
+ 				getProjectInfo(reviewCallback);
+ 				/////////////////////////////////////
+
  				form.each(function(){
  					this.reset();
  				})
@@ -54,13 +107,8 @@ $(function(){
  			})
 	})
 
-	var projectUrl = window.location.href + ".json";
-	$.get(projectUrl, function(data){
-		var supplies = data.supplies
-		var user = data.user
-		console.log(user)
-		//please rebuild project show page with this jquery response
-	})
+	//populate show page
+	getProjectInfo(buildHtmlCallback)
 })
 
 </script>
