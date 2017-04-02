@@ -4,9 +4,7 @@ class ProjectsController < ApplicationController
 	def new
 		@user = User.find(params[:user_id])
 		@project = @user.projects.build
-		10.times do
-			@project.supplies.build
-		end
+		@project.supplies.build
 	end
 
 	def edit
