@@ -3,7 +3,7 @@ class ReviewsController < ApplicationController
 		@review = Review.create(review_params)
 		@review.project.user.notifications = true
 		@review.project.user.save
-		redirect_to user_project_path(@review.project.user, @review.project)
+		render 'reviews/show', :layout => false
 	end
 
 	def destroy

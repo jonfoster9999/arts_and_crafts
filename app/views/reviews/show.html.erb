@@ -1,0 +1,6 @@
+<li>"<%= @review.content %>" - Rating: <%= @review.rating %> <br>By <%= link_to @review.author.name, user_path(@review.author) %>
+	<% if @review.author_id == current_user.id %>
+		<br>
+		<%= link_to "Delete", @review, :method => :delete %>
+	<% end %>
+</li>

@@ -37,3 +37,23 @@
 		<%= render :partial => "review", :collection => @project.reviews %>
 	</ul>
 <% end %>
+
+<script>
+
+$(function(){
+	var form = $('form')
+	form.submit(function(e){
+		e.preventDefault();
+		form.removeClass('hidden');
+ 		$.post(this.action, form.serialize())
+ 			.success(function(data){
+ 				form.each(function(){
+ 					this.reset();
+ 				})
+ 				$('#submit').attr("disabled", false)
+ 				$('.project_comments').append(data)
+ 			})
+	})
+})
+
+</script>
