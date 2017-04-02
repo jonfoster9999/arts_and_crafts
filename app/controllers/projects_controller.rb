@@ -26,8 +26,13 @@ class ProjectsController < ApplicationController
 		@user = User.find(params[:user_id])
 		@project = Project.find(params[:id])
 		@review = Review.new
+
 		if @project.user != @user
 			render :error
+		end
+		respond_to do |format|
+			format.html {render :show}
+			format.json {render json: @project}
 		end
 	end
 

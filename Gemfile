@@ -9,6 +9,8 @@ gem 'pry'
 
 gem 'omniauth'
 
+gem 'active_model_serializers'
+
 gem 'omniauth-facebook'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.1'

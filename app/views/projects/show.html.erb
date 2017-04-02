@@ -30,14 +30,13 @@
 	<%= render :partial => "comment_form", locals: {project: @project, review: @review} %>
 </div>
 <h3>Reviews: </h3>
+<ul class="project_comments">
 <% if @project.reviews.empty? %>
-	No Comments Yet.
 <% else %>
-	<ul class="project_comments">
-		<%= render :partial => "review", :collection => @project.reviews %>
-	</ul>
-<% end %>
 
+		<%= render :partial => "review", :collection => @project.reviews %>
+
+<% end %>
 <script>
 
 $(function(){
@@ -53,6 +52,14 @@ $(function(){
  				$('#submit').attr("disabled", false)
  				$('.project_comments').append(data)
  			})
+	})
+
+	var projectUrl = window.location.href + ".json";
+	$.get(projectUrl, function(data){
+		var supplies = data.supplies
+		var user = data.user
+		console.log(user)
+		//please rebuild project show page with this jquery response
 	})
 })
 
