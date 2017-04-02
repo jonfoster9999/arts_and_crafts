@@ -1,4 +1,9 @@
 class SuppliesController < ApplicationController
+
+	def new
+		render :new, :layout => false
+	end
+
 	def show
 		@supply = Supply.find(params[:id])
 	end
