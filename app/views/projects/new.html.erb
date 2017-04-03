@@ -25,8 +25,8 @@ $(function(){
 		e.preventDefault();
 		$.get(this.href, function(response){
 			index++;
-			var str = response.replace(/index/g, index) + "<br>"
-			$('#newSupply').before(str)
+			var supplyInputHTML = response.replace(/index/g, index) + "<br>"
+			$('#newSupply').before(supplyInputHTML)
 		})
 	})
 })
