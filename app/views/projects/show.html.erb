@@ -1,29 +1,8 @@
-<br>
-<h2><%= @project.title %> (<span id="rating"><%= @project.average_rating %></span>/5.0 average rating) </h2>
 <% if current_user.id == @project.user_id %>
 	<%= link_to "Edit", edit_user_project_path(@user, @project) %>
 	<%= link_to "Delete", user_project_path(@user, @project), :method => :delete %>
 <% end %>
-<h5>by <%= link_to @user.name, user_path(@user) %></h5>
-
-<div class = "description">
-	Description:<p><%= @project.description %></p>
-</div>
-
-<div class="supplies">
-	Supplies:<br>
-	----------------------
-	<% if !@project.supplies.empty? %>
-		<ul class="list_of_supplies">
-			<%= render :partial => "supply", :collection => @project.supplies.uniq %>
-			----------------------
-			<li class="supply_list">Total Cost: $<%= @project.total_price %></li>
-
-		</ul>
-	<% else %>
-		<p>No supplies listed.</p>
-	<% end %>
-</div>
+<br>
 <br>
 <div class="comment_form">
 	Write a review:
@@ -35,79 +14,106 @@
 <script>
 
 $(function(){
-	/////////////
-	//variables// 
-	/////////////
+
+	//variables:
 
 	var projectUrl = window.location.href + ".json";
 	var form = $('form')
 
-	//generic get function
+	//generic get function:
+
  	function getProjectInfo (callback) {
  		$.get(projectUrl)
  			.success(callback)
  		}
 
- 	/////////////
- 	//callbacks//
- 	/////////////
+ 	//callbacks:
 
  	function buildHtmlCallback(response) {
-
- 		///////////////////////
- 		//TODO: BUILD MY VIEW//
- 		///////////////////////
-
- 		console.log(response, "HEARD CLICK")
+ 		var project = new ProjectForShowPage(response)
+ 		var projectHTML = project.buildProjectHtml();
+ 		$('.comment_form').before(projectHTML)
+ 		
  	}
 	
-	function reviewCallback(response) {
-			//gets the new version of the project after the review is added, aka reviews length 
-			// increases by one and project.averageReview() returns updated info.	
+	function reviewCallback(response) {	
 		var myProject = new ProjectForShowPage(response)
-		//UPDATE CURRENT AVERAGE RATING TO NEW AVERAGE RATING
 		$('#rating').text(myProject.averageRating())
 	}
 
-	//constructor
+	//constructor:
+
 	function ProjectForShowPage(productHash) {
 		for (key in productHash) {
 			this[key] = productHash[key]
-			//make this available site wide?
 		}
 	}
 
-	//constructor prototype
-	ProjectForShowPage.prototype.averageRating = function(){
-		var ratingTotal = 0;
-		var numberOfReviews = this.reviews.length;
-		for(var i = 0, n = this.reviews.length; i < n; i++) {
-			ratingTotal += this.reviews[i].rating;
+	//constructor prototype: 
+
+	ProjectForShowPage.prototype= {
+		averageRating : function(){
+			var ratingTotal = 0;
+			var numberOfReviews = this.reviews.length;
+			for(var i = 0, n = this.reviews.length; i < n; i++) {
+				ratingTotal += this.reviews[i].rating;
+			}
+			var rating = (ratingTotal/numberOfReviews).toFixed(1)
+			return isNaN(rating) ? (0).toFixed(1) : rating
+		},
+		totalCost: function(){
+			var totalCost = 0
+			this.supplies.forEach(function(value){
+				totalCost += value.price
+			})
+			return totalCost
+		},
+		buildProjectHtml: function(){
+			var html = "<div>"
+			html += "<h2>" + this.title  +" (<span id='rating'>" + this.averageRating() + "</span>\/5.0 average rating)</h2>"
+			html += "<h5>by: <a href='/users/" + this.user.id + "'>" + this.user.name + "</a></h5>"
+			html += "<div class='description'>Description:<br><br>"
+			html += this.description + "<br>"
+			html += "</div><br>"
+			html += "<div class='supplies'>Supplies: <br>"
+			html += "----------------------<br>"
+			for(var i = 0, n = this.supplies.length; i<n; i++) {
+				var supply = this.supplies[i]
+				html += "<a href='/supplies/" + supply.id + "'>" + supply.title + "</a>"
+				html += " - $" + supply.price + "<br>"
+			}
+			html += "----------------------<br>"
+			html += "Total Cost: $" + this.totalCost();
+			html += "</div>"
+			return html
 		}
-		return (ratingTotal/numberOfReviews).toFixed(1)
 	}
 
-	//review submission
+	//review submission:
 
 	form.submit(function(e){
 		e.preventDefault();
-		form.removeClass('hidden');
  		$.post(this.action, form.serialize())
  			.success(function(data){
- 				
- 				//handles updating the average review
- 				getProjectInfo(reviewCallback);
- 				/////////////////////////////////////
 
+ 				//handles updating the average review:
+ 				getProjectInfo(reviewCallback);
+
+ 				//Clear form fields:
  				form.each(function(){
  					this.reset();
  				})
+
+ 				//reactivate form after submission:
  				$('#submit').attr("disabled", false)
+
+ 				//append data to reviews list:
  				$('.project_comments').append(data)
  			})
 	})
 
-	//populate show page
+	//populate show page:
+
 	getProjectInfo(buildHtmlCallback)
 })
 
