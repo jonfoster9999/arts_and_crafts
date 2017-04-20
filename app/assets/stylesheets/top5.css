@@ -1,0 +1,13 @@
+body {
+	background-color: white;
+}
+
+#menu {
+	float: left;
+	width: 50%;
+}
+
+#results {
+	float: left;
+	width: 50%;
+}
